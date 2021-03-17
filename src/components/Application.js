@@ -2,7 +2,46 @@ import React, { useState } from "react";
 import "components/Application.scss";
 import DayList from "components/DayList";
 import InterviewerList from "components/InterviewerList";
+import Appointment from "components/Appointment/";
 
+const appointments = [
+  {
+    id: 1,
+    time: "12pm",
+  },
+  {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Lydia Miller-Jones",
+      interviewer: {
+        id: 1,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  },
+     {
+    id: 3,
+    time: "11pm",
+  },
+    {
+    id: 4,
+    time: "10pm",
+    interview: {
+      student: "Terrence Jeffords",
+      interviewer: {
+        id: 2,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  },
+    {
+    id: 5,
+    time: "2pm",
+  }
+];
 
   const daysArray = [
     {
@@ -28,9 +67,28 @@ import InterviewerList from "components/InterviewerList";
     { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
     { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
   ];
+
+
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
   const [interviewer, setInterviewer] = useState("");
+
+  // const interviewers = getInterviewersForDay(state, state.day)
+
+  const appointmentList = appointments.map(appointment => {
+   
+    return (<Appointment 
+      key={appointment.id} 
+      id={appointment.id} 
+      time={appointment.time} 
+      interview={appointment.interview} 
+    />
+    )
+
+  }
+  );
+
+
 
   return (
     <main className="layout">
@@ -55,7 +113,10 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
-        <InterviewerList interviewers={interviewers} interviewer={interviewer} setInterviewer={setInterviewer} />
+        
+        {appointmentList}
+
+        {/* <InterviewerList interviewers={interviewers} interviewer={interviewer} setInterviewer={setInterviewer} /> */}
       </section>
 
     </main>

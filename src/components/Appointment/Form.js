@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import InterviewerList from "components/InterviewerList"
+import InterviewerList from "components/InterviewerList";
 import InterviewerListItem from "components/InterviewerListItem";
-import Button from "components/Button"
+import Button from "components/Button";
 
 
 export default function Form (props){
@@ -10,19 +10,13 @@ export default function Form (props){
 
 
   const reset = () => {
-    if(name){
-      return setName( name === "");
-    }
-    if(interviewer){
-      return setInterviewer(interviewer === null);
-    }
+    setName("");
+    setInterviewer(null);
   }
 
   const cancel = (props) => {
-    return (
-      reset(),
-      props.onCancel()
-    )
+      reset();
+      props.onCancel();
   }
 
   return (
@@ -33,26 +27,19 @@ export default function Form (props){
     >
       <input
         className="appointment__create-input text--semi-bold"
-        name={name}
+        name="StudentName"
         type="text"
         placeholder="Enter Student Name"
-        /*
-          This must be a controlled component
-        */
-        onChange={setName}
+        value= {name}
+        onChange={event => setName(event.target.value)}
       />
     </form>
     <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">
-      <Button danger onClick={props.onCancel} >Cancel</Button>
-
-      {/* <Button danger onClick={cancel(props)}>Cancel</Button> */}
-{/* TRYING TO CLEAR FORM AND APPLY PROPS.ONCANCEL ON CLICK 
-INTERVIEWER NOT CLICKABLE */}
-
-      <Button confirm onClick={props.onSave}>Save</Button>
+      <Button danger onClick={cancel} >Cancel</Button>
+      <Button confirm onClick={(event) =>props.onSave(name, interviewer)}>Save</Button>
     </section>
   </section>
 </main>
