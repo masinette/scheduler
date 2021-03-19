@@ -4,7 +4,7 @@ import "components/Application.scss";
 import DayList from "components/DayList";
 import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment/";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors.js";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors.js";
 
 
 
@@ -36,23 +36,31 @@ export default function Application(props) {
     
   });
   
-  
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-  
-  const appointmentList = dailyAppointments.map(appointment => {  
-  const interview = getInterview(state, appointment.interview);
+//ASK FOR CLARITY ON THIS
+//Import the getInterviewersForDay selector. 
+//Use it to create an interviewers array that will first be passed to the 
+//Appointment component and then passed down to the Form component.
 
-    return (
-      <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-      />
-    );
+
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  console.log(dailyAppointments)
+
+  const appointmentList = dailyAppointments.map(appointment => {  
+    const interview = getInterview(state, appointment.interview);
+  // console.log("DAILYINTERVIEWERS",dailyInterviewers)
+      return (
+        <Appointment
+          key={appointment.id}
+          id={appointment.id}
+          time={appointment.time}
+          interview={interview}
+          interviewers={dailyInterviewers}
+        />
+        
+      )
   });
-    
-    // const interviewers = getAppointmentsForDay(state, state.day):
 
 
   useEffect(() => {
@@ -66,13 +74,14 @@ export default function Application(props) {
       axios.get(interviewersURL)
     ])
     .then(all => {
-      console.log("DAYS",all[0].data);
-      console.log("APPT", all[1].data);
-      console.log("INTVWR", all[2].data);
+      // console.log("DAYS",all[0].data);
+      // console.log("APPT", all[1].data);
+      // console.log("INTVWR", all[2].data);
       setState(prev => ({...prev, 
         days: all[0].data, 
         appointments: all[1].data, 
-        interviewers: all[2].data }));
+        interviewers: all[2].data
+        }));
     });
   }, [])
 
@@ -111,6 +120,11 @@ export default function Application(props) {
       <section className="schedule">
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */} 
         {appointmentList}
+        <Appointment 
+          key="last"
+          time="5pm"
+        />
+        
       </section>
 
     </main>

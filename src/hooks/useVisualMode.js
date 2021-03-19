@@ -7,18 +7,6 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
-//add the mode to stack
-  // function transition(newMode){
-  //   setHistory((prevHistory)=> {
-  //     setMode(newMode);
-  //     const newHistory = [...prevHistory];
-  //     newHistory.push(newMode);
-  //     return newHistory;
-  //   })
-  // }
-
-
-
   function transition(newMode, replace = false){
     if (replace){
       back();
