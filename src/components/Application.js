@@ -36,10 +36,9 @@ export default function Application(props) {
     
   });
   
-//ASK FOR CLARITY ON THIS
-//Import the getInterviewersForDay selector. 
-//Use it to create an interviewers array that will first be passed to the 
-//Appointment component and then passed down to the Form component.
+  //Import the getInterviewersForDay selector. 
+  //Use it to create an interviewers array that will first be passed to the 
+  //Appointment component and then passed down to the Form component.
 
 
   const dailyInterviewers = getInterviewersForDay(state, state.day);
@@ -57,6 +56,7 @@ export default function Application(props) {
           time={appointment.time}
           interview={interview}
           interviewers={dailyInterviewers}
+          {...bookInterview}
         />
         
       )
@@ -86,6 +86,10 @@ export default function Application(props) {
   }, [])
 
 
+
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
 
 
 

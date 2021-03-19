@@ -30,9 +30,6 @@ return (
         interviewer={props.interview.interviewer}
       />)}
 
-
-
-
       {/* Use the back function to return to the EMPTY state when the cancel button is clicked. */}
       {mode === CREATE && 
         <Form 
@@ -41,12 +38,7 @@ return (
         onCancel={() => back()}
       />}
 
-
-
-
-      
       {/* {mode === EMPTY && <Empty onAdd={() => console.log("Clicked onAdd")} />} */}
-
   </article>
 )
 
