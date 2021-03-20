@@ -6,6 +6,8 @@ import Form from "components/Appointment/Form";
 import Empty from "components/Appointment/Empty";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
+import Error from "components/Appointment/Error";
+
 
 import useVisualMode, {mode, transition, back} from "hooks/useVisualMode";
 
@@ -16,8 +18,9 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
 const EDIT = "EDIT";
-const ERROR_DELETE = "ERROR_DELETE";
 const CONFIRM = "CONFIRM";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 
 export default function Appointment(props) {
@@ -36,22 +39,17 @@ const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
     props.bookInterview(props.id, interview).then(()=>{
     //  - Transition to SHOW when the promise returned by props.bookInterview resolves. This means that the PUT request is complete.
       transition(SHOW)
-    })    
+    }).catch(()=>{
+        transition(ERROR_SAVE)
+    })
   }
-  // function remove(){
-  //   transition(DELETING)
-  //   props.cancelInterview(props.id).then(()=>{
-  //     transition(EMPTY)
-  //   })
-  //   // const done = ()=> 
-  //   // const error = ()=> transition(ERROR_DELETE)
-  // }
-
 
   function remove(){
     transition(DELETING)
     props.cancelInterview(props.id).then(()=>{
       transition(EMPTY)
+    }).catch(()=>{
+      transition(ERROR_DELETE)
     })
     // const done = ()=> 
     // const error = ()=> transition(ERROR_DELETE)
@@ -108,6 +106,8 @@ return (
         onCancel={() => back()}
         onConfirm={remove}
       />}
+      {mode === ERROR_DELETE && <Error message="Could not delete appointment" onClose={() => transition(SHOW)}/>}
+      {mode === ERROR_SAVE && <Error message="Could not save appointment" onClose={() => transition(CREATE)}/>}
 
 
   </article>
