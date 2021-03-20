@@ -36,7 +36,6 @@ export default function useApplicationData() {
     // you may put the line below, but will have to remove/comment hardcoded appointments variable
     appointments: {},
     interviewers: {}
-    
   });
 
 
