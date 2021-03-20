@@ -36,24 +36,27 @@ const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
     };
     transition(SAVING)
     //create a new interview object to be passed to props.bookInterview
-    props.bookInterview(props.id, interview).then(()=>{
+    props.bookInterview(props.id, interview)
+    .then(()=>{
     //  - Transition to SHOW when the promise returned by props.bookInterview resolves. This means that the PUT request is complete.
       transition(SHOW)
-    }).catch(()=>{
-        transition(ERROR_SAVE)
+    })
+    .catch((error)=>{
+        transition(ERROR_SAVE, true)
     })
   }
 
   function remove(){
-    transition(DELETING)
-    props.cancelInterview(props.id).then(()=>{
+    transition(DELETING, true)
+    props.cancelInterview(props.id)
+    .then(()=>{
       transition(EMPTY)
-    }).catch(()=>{
-      transition(ERROR_DELETE)
     })
-    // const done = ()=> 
-    // const error = ()=> transition(ERROR_DELETE)
+    .catch((error)=>{
+      transition(ERROR_DELETE, true)
+    })
   }
+
   function edit() {
     transition(EDIT)
   }
@@ -106,7 +109,7 @@ return (
         onCancel={() => back()}
         onConfirm={remove}
       />}
-      {mode === ERROR_DELETE && <Error message="Could not delete appointment" onClose={() => transition(SHOW)}/>}
+      {mode === ERROR_DELETE && <Error message="Could not delete appointment" onClose={() => back()}/>}
       {mode === ERROR_SAVE && <Error message="Could not save appointment" onClose={() => transition(CREATE)}/>}
 
 
