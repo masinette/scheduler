@@ -66,7 +66,7 @@ const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
 
   }
 
-console.log("INDEX INTERVIEWER",props.interview);
+// console.log("INDEX INTERVIEWER",props.interview);
 
 return (
   <article className="appointment">

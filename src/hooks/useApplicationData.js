@@ -48,6 +48,13 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
   };
+    const newDays = state.days.map(day => {
+      if(state.day === day.name){
+          day.spots--;
+        // console.log("NEWDAYS SPOTS", day.spots)
+      }
+      return day;
+    })
   /*
 - Make the request with appointment id, with the interview data in the body
 - When the response comes back we update the state using the existing setState.
@@ -55,10 +62,8 @@ export default function useApplicationData() {
     const bookInterviewURL = `http://localhost:8001/api/appointments/${id}`;
     return axios.put(bookInterviewURL, {interview})
     .then(()=>{
-      setState({...state,appointments});   
+      setState({...state,appointments, newDays}); 
     })
-    
-    // console.log(id, interview);
   }
 
   function cancelInterview(id) {
@@ -71,16 +76,31 @@ export default function useApplicationData() {
     const appointments = {
       ...state.appointments,
       [id]: appointment
-  };
+    };
+    // const newSpots = updateSpots(state.day, state.days, appointments);
+    const newDays = state.days.map(day => {
+      if(state.day === day.name){
+          day.spots++;
+        console.log("NEWDAYS SPOTS", day.spots)
+      }
+      return day;
+    })
+
+//     var numbers = [{"myKey":1},{"myKey": 2}];
+// var newarray = numbers.map(myFunction)
+// function myFunction(num) {
+//   num.myKey=num.myKey*10;
+//   return num;
+// }
+
     //use the appointment id to find the right appointment slot and set it's interview data to null.
-
-
-      const cancelInterviewURL = `http://localhost:8001/api/appointments/${id}`;
-      return axios.delete(cancelInterviewURL)
-      .then(()=>{
-        setState({...state,appointments});   
-      })
-      
-    }
+ const cancelInterviewURL = `http://localhost:8001/api/appointments/${id}`;
+  return axios.delete(cancelInterviewURL)
+    .then(()=>{
+      // console.log("STATE INSIDE CANCEL", state)
+      setState({...state,appointments, newDays});  
+      // console.log( "INSIDE CANCEL", updateSpots(state.day, state.days, state.appointments))
+    })     
+  }
   return { state, setDay, bookInterview , cancelInterview };
 }

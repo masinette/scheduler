@@ -39,7 +39,7 @@ export default function Application(props) {
         />
       )
   });
-  console.log("STATE", state, "SETDAY", setDay)
+  // console.log("STATE", state, "SETDAY", setDay)
 
   return (
     <main className="layout">
@@ -61,6 +61,8 @@ export default function Application(props) {
         day={state.day} 
         // sets the current day selection
         setDay={setDay} 
+
+        // spots={updateSpots}
         />
       </nav>
       <img
