@@ -38,7 +38,7 @@ export default function useVisualMode(initial) {
   }
 
 
-console.log({mode})
+// console.log({mode})
 // return an object with a mode property
 return { mode, transition, back };
 }

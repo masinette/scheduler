@@ -26,12 +26,6 @@ return {...interview, interviewer: state.interviewers[interview.interviewer]}
 }
 
 
-
-
-
-
-
-
 // Copy and paste the getAppointmentsForDay function and alter it to make the interviewer tests pass.
 
 export function getInterviewersForDay  (state, day){
