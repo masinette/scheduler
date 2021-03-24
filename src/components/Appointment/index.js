@@ -38,7 +38,7 @@ const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
     //create a new interview object to be passed to props.bookInterview
     props.bookInterview(props.id, interview)
     .then(()=>{
-    //  - Transition to SHOW when the promise returned by props.bookInterview resolves. This means that the PUT request is complete.
+    // transition to SHOW when the promise returned by props.bookInterview resolves. This means that the PUT request is complete.
       transition(SHOW)
     })
     .catch((error)=>{
@@ -63,10 +63,8 @@ const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
 
   function confirm(){
     transition(CONFIRM);
-
   }
 
-// console.log("INDEX INTERVIEWER",props.interview);
 
 return (
   <article className="appointment" data-testid="appointment">

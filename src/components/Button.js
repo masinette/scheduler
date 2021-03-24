@@ -20,6 +20,3 @@ export default function Button(props) {
    );
  }
 
-//classNames('foo', 'bar'); // => 'foo bar'
-//classNames('foo', { bar: true }); // => 'foo bar'
-//classNames('foo', { bar: false }); // => 'foo'

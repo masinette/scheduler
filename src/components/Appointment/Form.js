@@ -15,18 +15,12 @@ export default function Form (props){
     setInterviewer(null);
   }
 
+//clear interviewer and student name if cancel is selected
   const cancel = (props) => {
       reset();
-      // props.onCancel();
       props.onCancel();
   }
-  // function validate() {
-  //   if (name === "") {
-  //     setError("student name cannot be blank");
-  //     return;
-  //   }
-  //   props.onSave(name, interviewer);
-  // }
+
   function validate() {
     if (name === "") {
       setError("student name cannot be blank");
@@ -43,7 +37,7 @@ export default function Form (props){
   }
 
   return (
-    <main className="appointment__card appointment__card--create">
+<main className="appointment__card appointment__card--create">
   <section className="appointment__card-left">
     <form autoComplete="off" 
     onSubmit={event => event.preventDefault()}
@@ -66,10 +60,7 @@ export default function Form (props){
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">
-      {/* <Button danger onClick={cancel} >Cancel</Button> */}
-      {/* {interviewers={interviewers}} */}
 
-      
       <Button danger onClick={(event) =>cancel(props)} >Cancel</Button>
       <Button confirm onClick={(event) =>validate()}>Save</Button>
     </section>

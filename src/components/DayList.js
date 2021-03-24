@@ -1,5 +1,4 @@
 import React from "react";
-// import classnames from 'classnames';
 import DayListItem from "components/DayListItem";
 
 // pass in props, assign value of map from days

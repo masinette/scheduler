@@ -23,7 +23,6 @@ export default function Application(props) {
   //Appointment component and then passed down to the Form component.
   const dailyInterviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  // console.log(dailyAppointments)
 
   const appointmentList = dailyAppointments.map(appointment => {  
     const interview = getInterview(state, appointment.interview);
@@ -39,7 +38,6 @@ export default function Application(props) {
         />
       )
   });
-  // console.log("STATE", state, "SETDAY", setDay)
 
   return (
     <main className="layout">
@@ -61,8 +59,6 @@ export default function Application(props) {
         day={state.day} 
         // sets the current day selection
         setDay={setDay} 
-
-        // spots={updateSpots}
         />
       </nav>
       <img
@@ -72,7 +68,6 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */} 
         {appointmentList}
         <Appointment 
           key="last"

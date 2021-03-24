@@ -65,7 +65,6 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
     getByText(appointment, "Are you sure you would like to delete?")
   ).toBeInTheDocument();
 
-  // debug();
   // 5. Click the "Confirm" button on the confirmation.
   fireEvent.click(queryByText(appointment, "Confirm"));
 
@@ -80,7 +79,6 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
     queryByText(day, "Monday")
   );
 
-//data persisted from previous test
   expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
 });
 
@@ -116,12 +114,11 @@ it("loads data, edits an interview and keeps the spots remaining for Monday the 
     queryByText(day, "Monday")
   );
 
-//data persisted from previous test
   expect(getByText(day, "no spots remaining")).toBeInTheDocument();
 });
 
 it("shows the save error when failing to save an appointment",  async () => {
- const { container, debug } = render(<Application />);
+  const { container, debug } = render(<Application />);
 
   await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -137,11 +134,7 @@ it("shows the save error when failing to save an appointment",  async () => {
   fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
 
   // 3. Click the "Save" button on the booked appointment.
-  debug();
   fireEvent.click(getByText(appointment, "Save"));
-
-
-
 
   const myMock = axios.put.mockRejectedValueOnce("Could not save appointment");
   await expect(myMock()).rejects.toBe("Could not save appointment");
@@ -152,7 +145,7 @@ it("shows the save error when failing to save an appointment",  async () => {
 
 
 it("shows the delete error when failing to delete an existing appointment", async () => {
-// 1. Render the Application.
+  // 1. Render the Application.
   const { container, debug } = render(<Application />);
 
   // 2. Wait until the text "Archie Cohen" is displayed.
@@ -174,18 +167,7 @@ it("shows the delete error when failing to delete an existing appointment", asyn
   // 5. Click the "Confirm" button on the confirmation.
   fireEvent.click(queryByText(appointment, "Confirm"))
 
-  // axios.delete.mockRejectedValueOnce({});
-  debug();
-
-//   const asyncMock = axios.delete.mockRejectedValueOnce(() => {
-//   return expect(getByText(appointment, "Could not delete appointment NOW HELLO")).toBeInTheDocument()
-// })
-  // expect(getByText(appointment, "Could not delete appointment")).toBeInTheDocument()
-
-  // await asyncMock(); // throws "Async error"
-
   const myMock = axios.delete.mockRejectedValueOnce("Could not delete appointment");
-  // await expect(myMock()).resolves.toBe(42);
   await expect(myMock()).rejects.toBe("Could not delete appointment");
 });
 
