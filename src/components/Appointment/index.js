@@ -69,7 +69,7 @@ const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY)
 // console.log("INDEX INTERVIEWER",props.interview);
 
 return (
-  <article className="appointment">
+  <article className="appointment" data-testid="appointment">
     <Header time = {props.time}/>
 
     {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
@@ -105,7 +105,7 @@ return (
       {mode === SAVING && <Status message="Saving"/>}
       {mode === DELETING && <Status message="Deleting"/>}
       {mode === CONFIRM && 
-      <Confirm message="Confirm" 
+      <Confirm message="Are you sure you would like to delete?" 
         onCancel={() => back()}
         onConfirm={remove}
       />}

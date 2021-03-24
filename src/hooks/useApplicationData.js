@@ -61,7 +61,7 @@ export default function useApplicationData() {
   }
 
   function cancelInterview(id) {
-    console.log("Clicked trash can");
+    // console.log("INITIAL STATE DAYS",state.days);
 
     const appointment = {
       ...state.appointments[id],

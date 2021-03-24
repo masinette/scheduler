@@ -56,7 +56,6 @@ const fixtures = {
 export default {
   defaults: { baseURL: "" },
   get: jest.fn(url => {
-    console.log("URL:",url);
     if (url === "http://localhost:8001/api/days") {
       return Promise.resolve({
         status: 200,
@@ -82,5 +81,72 @@ export default {
         data: fixtures.interviewers
       });
     }
+  }),
+
+  put: jest.fn(url => {
+    if (url === "http://localhost:8001/api/days") {
+      return Promise.resolve({
+        status: 200,
+        statusText: "OK",
+        data: fixtures.days
+      });
+    }
+
+    if (url === `http://localhost:8001/api/appointments/1`) {
+      /* Resolve appointments data */
+      return Promise.resolve({
+        status: 200,
+        statusText: "OK",
+        data: fixtures.appointments
+      });
+    }
+        if (url === `http://localhost:8001/api/appointments/2`) {
+      /* Resolve appointments data */
+      return Promise.resolve({
+        status: 200,
+        statusText: "OK",
+        data: fixtures.appointments
+      });
+    }
+
+    if (url === "http://localhost:8001/api/interviewers") {
+      /* Resolve interviewers data */
+      return Promise.resolve({
+        status: 200,
+        statusText: "OK",
+        data: fixtures.interviewers
+      });
+    }
+  }),
+
+    delete: jest.fn(url => {
+    if (url === "http://localhost:8001/api/days") {
+
+      return Promise.resolve({
+        status: 200,
+        statusText: "OK",
+        data: fixtures.days
+      });
+    }
+
+    if (url === `http://localhost:8001/api/appointments/2`) {
+      /* Resolve appointments data */
+
+      return Promise.resolve({
+        status: 200,
+        statusText: "OK",
+        data: fixtures.appointments
+      });
+    }
+
+    if (url === "http://localhost:8001/api/interviewers") {
+      /* Resolve interviewers data */
+      return Promise.resolve({
+        status: 200,
+        statusText: "OK",
+        data: fixtures.interviewers
+      });
+    }
   })
+
 };
